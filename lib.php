@@ -34,24 +34,14 @@ function shibboleth_ensure_user($username, $userdata, $autoring_instance=null, $
     } catch (AuthUnknownUserException $e) {
         $isnew = true;
         $user->username = $username;
-        $user->staff = false;
-        $user->admin = false;
+        $user->staff = 0;
+        $user->admin = 0;
         $user->password = sha1(uniqid('', true));
         $user->authinstance = null;
         DebugUtil::disable();
         $user->quota_init();
         DebugUtil::enable();
     }
-
-    $user->passwordchange = false;
-    $user->active = true;
-    $user->deleted = false;
-    $user->expiry = null;
-    $user->expirymailsent = false;
-    $user->inactivemailsent = false;
-    $user->suspendedctime = null;
-    $user->suspendedreason = null;
-    $user->suspendedcusr = null;
 
     if ($update_user_data || $isnew) {
         $keys = array('firstname', 'lastname', 'email', 'admin', 'staff', 'preferredname', 'studentid');
