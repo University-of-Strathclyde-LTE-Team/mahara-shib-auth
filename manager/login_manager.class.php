@@ -294,6 +294,9 @@ class login_manager {
      * @param string $value		shibboleth field's value
      */
     protected function is_shibboleth_field($key, $value) {
+		// STRATH: Bypass this function as our attribute names 
+		// have arbitrary format
+		return true;
         $head = 'shib';
         $head_length = strlen($head);
         if (strlen($key) < $head_length) {
